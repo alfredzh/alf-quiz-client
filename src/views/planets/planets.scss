@@ -1,0 +1,113 @@
+.plants {
+    .icon-addminer {
+        color: #00F0FF;
+        font-family: Lato, Arial, sans-serif;
+        font-weight: 700;
+        position: relative;
+        padding-left: 18px;
+        &:before {
+            width: 12px;
+            height: 12px;
+            content: '';
+            display: block;
+            position: absolute;
+            top: -1px;
+            left: 0;
+            background: url(../../assets/images/create.svg) center no-repeat;
+        }
+    }
+    table {
+        tr { 
+            cursor: pointer; 
+        }
+    }
+    .create-form {
+        h2 {
+            margin-top: 32px !important;
+            margin-bottom: 32px !important;
+        }
+    
+        .field {
+            margin-bottom: 16px;
+            position: relative;
+    
+            label {
+                color: #9499C3;
+                font-size: 11px;
+                display: block;
+                margin-bottom: 4px;
+            }
+    
+            input, select {   
+                box-sizing: border-box;
+                background-color: #242538;
+                color: #fff;
+                font-family: Lato, Arial, sans-serif;
+                font-weight: 700;
+                border: none;
+                width: 100%;
+                padding: 12px;
+                border-radius: 4px;
+    
+                &:active, &:focus {
+                    box-shadow: 0 0 3px 1px #00F0FF;
+                    outline: none;
+                }
+            }
+    
+            &.error {
+                input, select {
+                    box-shadow: 0 0 3px 1px #EB5757;
+    
+                    &:active, &:focus {
+                        box-shadow: 0 0 3px 1px #EB5757;
+                        outline: none;
+                    }
+                }
+                .message {
+                    position: absolute;
+                    bottom: -14px;
+                    font-size: 9px;
+                    color: #EB5757;
+                }
+            }
+        }
+    
+        .columns {
+            margin: 0 -6px;
+            display: flex;
+            gap: 6px;
+            .column {
+                padding: 0 6px;
+                flex: 1;
+            }
+        }
+    
+        .green {
+            color: #00CF67;
+            text-align: center;
+        }
+    
+        .red {
+            color: #EB5757;
+            text-align: center;
+        }
+    
+        .actions {
+            text-align: center;
+            margin-top: 32px;
+        }
+    
+        button {
+            background: #E1E2EF;
+            border: none;
+            color: #1A1B2F;
+            padding: 8px 32px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    }
+    .success-title {
+        padding: 56px 0 0 0;
+    }
+}

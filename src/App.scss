@@ -1,0 +1,148 @@
+.app {
+    width: 1407px;
+    margin: 0 auto;
+    padding: 0 32px;
+    min-height: 100vh;
+    display: flex;
+    .logo {
+        margin-top: 24px;
+    }
+    .main {
+        width: 607px;
+    }
+    .side {
+        width: 800px;
+        .side-bg {
+            width: 800px; 
+            height: 801px;
+            border: 2px solid #3F4055;
+            background-image: url(assets/images/background.jpg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .years {
+            margin-top: 83px;
+            color: #FFF;
+            font-family: Lato;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 100%; /* 16px */
+            text-transform: uppercase;
+        }
+    }
+    .main-nav {
+        margin-top: 32px;
+        display: flex;
+        padding:  0 32px 24px 32px;
+        border-bottom: 1px solid #33344B;
+        a {
+            width: 70px;
+            height: 16px;
+            margin-right: 10px;
+            display: block;
+            padding-top: 50px;
+            text-align: center;
+            color: #9499C3;
+            font-family: Lato;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 100%; /* 12px */
+            text-decoration: none;
+            border: 1px solid transparent;
+            &.active {
+                border-radius: 8px;
+                border-color: #32334A;
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            }
+        }
+        .icon-miner {
+            background: url(assets/images/miner.svg) center no-repeat;
+            &.active {
+                background: url(assets/images/miner-active.svg) center no-repeat;
+            }
+        }
+        .icon-asteroid {
+            background: url(assets/images/asteroid.svg) center no-repeat;
+            &.active {
+                background: url(assets/images/asteroid-active.svg) center no-repeat;
+            }
+        }
+        .icon-planet {
+            background: url(assets/images/planet.svg) center no-repeat;
+            &.active {
+                background: url(assets/images/planet-active.svg) center no-repeat;
+            }
+        }
+    }
+    
+    table {
+        width: 543px;
+        margin: 0 auto;
+        border-collapse: collapse;
+        tr {
+            border-bottom: 1px solid #9499C3;
+        }
+        thead {
+            th {
+                text-align: left;
+                height: 42px;
+                color: #FFF;
+                font-family: Lato;
+                font-size: 10px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 100%; /* 11px */
+            }
+        }
+        tbody {
+            td {
+                height: 35px;
+                color: #9499C3;
+                font-family: Lato;
+                font-size: 11px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 100%; /* 11px */
+                &.active {
+                    color: #00CF67;
+                }
+                &.alert {
+                    color: #EB5757;
+                }
+            }
+        }
+    }
+    .rodal-mask {
+        background-color: #101123;
+        opacity: 0.8;
+    }
+    
+    .rodal-dialog {
+        width: 780px;
+        background-color: #1A1B2F;
+        box-shadow: 0px 16px 24px rgba(12, 13, 33, 0.6);
+        border-radius: 12px;
+        padding: 32px;
+    
+        h2 {
+            margin: 0;
+            font-size: 16px;
+            line-height: 100%;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+            color: white;
+        }
+    
+        .scrollable {
+            max-height: 390px;
+            overflow: auto;
+        }
+        ::-webkit-scrollbar {
+            display:none
+        }
+    }
+}

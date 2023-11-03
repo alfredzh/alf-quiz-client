@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Miners from "./views/miners/Miners";
+import Asteroids from "./views/asteroids/Asteroids";
+import Planets from "./views/planets/Planets";
+
+import backendMinerImage from './assets/images/backend-miner.svg'
+import Nav from "./views/nav/Nav";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="main">
+        <div className="logo">
+          <img src={backendMinerImage} />
+        </div>
+        <BrowserRouter>
+          <Nav />
+          <Routes>
+            <Route path="/miners" element={<Miners />} />
+            <Route path="/asteroids" element={<Asteroids />} />
+            <Route path="/planets" element={<Planets />} />
+            <Route path="*" element={<Navigate replace to="/miners" />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+      <div className="side">
+        <h2 className="years">- Years</h2>
+        <div className="side-bg"></div>
+      </div>
     </div>
   );
 }
