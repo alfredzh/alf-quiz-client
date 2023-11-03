@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import useWebSocket from "react-use-websocket";
+// import useWebSocket from "react-use-websocket";
 
 interface IAsteroid {
   currentMiner?: string;

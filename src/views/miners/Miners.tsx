@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useWebSocket from "react-use-websocket";
+// import useWebSocket from "react-use-websocket";
 import { IMiner, MinerStatus, MinerStatusMap } from "../../types/miner";
 import Rodal from "rodal";
 import "./miners.scss";
@@ -10,9 +10,9 @@ export default function Miners() {
   const [currentId, setCurrentId] = useState<string | undefined>(undefined);
   const [list, setList] = useState<IMiner[]>([]);
   const [popupVisible, setPopupVisible] = useState(false);
-  const { lastJsonMessage, readyState } = useWebSocket(
-    `${process.env.REACT_APP_SOCKET_URL}`
-  );
+  // const { lastJsonMessage, readyState } = useWebSocket(
+  //   `${process.env.REACT_APP_SOCKET_URL}`
+  // );
 
   const openPopup = (id: string, name: string) => {
     setCurrentName(name)

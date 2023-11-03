@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Project Asteroids Frontend Interview
+
+I'm sorry about the websocket part. Maybe it's my problem. I tried several time to connect to the socket server, but still got failed result. The restAPI part all works fine.
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
