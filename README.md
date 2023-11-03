@@ -1,6 +1,6 @@
 # Project Asteroids Frontend Interview
 
-I'm sorry about the websocket part. Maybe it's my problem. I tried several time to connect to the socket server, but still got failed result. The restAPI part all works fine.
+The restful API data are slightly different with socket data. This should be fixed!!!
 
 ## Getting Started with Create React App
 
