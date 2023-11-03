@@ -12,7 +12,7 @@ function App() {
     <div className="app">
       <div className="main">
         <div className="logo">
-          <img src={backendMinerImage} />
+          <img src={backendMinerImage} alt=''/>
         </div>
         <BrowserRouter>
           <Nav />

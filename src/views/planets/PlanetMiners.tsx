@@ -25,7 +25,7 @@ export default function PlanetMiners(props: { planetId: string }) {
     };
 
     getData();
-  }, []);
+  }, [props.planetId]);
 
   return (
     <div className="scrollable">

@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react";
-// import useWebSocket from "react-use-websocket";
 import { IMiner, MinerStatus, MinerStatusMap } from "../../types/miner";
 import Rodal from "rodal";
-import "./miners.scss";
 import MinerHistory from "./MinerHistory";
+import { IRefreshData } from "../../types/refreshData";
+import socket from "../../utils/socket";
+import "./miners.scss";
 
 export default function Miners() {
   const [currentName, setCurrentName] = useState<string | undefined>(undefined);
   const [currentId, setCurrentId] = useState<string | undefined>(undefined);
   const [list, setList] = useState<IMiner[]>([]);
   const [popupVisible, setPopupVisible] = useState(false);
-  // const { lastJsonMessage, readyState } = useWebSocket(
-  //   `${process.env.REACT_APP_SOCKET_URL}`
-  // );
 
   const openPopup = (id: string, name: string) => {
-    setCurrentName(name)
+    setCurrentName(name);
     setCurrentId(id);
     setPopupVisible(true);
   };
@@ -24,22 +22,24 @@ export default function Miners() {
     setPopupVisible(false);
   };
 
-  // useEffect(() => {
-  //   if (!lastJsonMessage || lastJsonMessage.message !== "minerUpdate") {
-  //     return;
-  //   }
-  //   const miner = lastJsonMessage.miner;
-  //   if (!miner) {
-  //     return;
-  //   }
-  //   const newList = list.map((item) => {
-  //     if (item.id === miner.id) {
-  //       item = miner;
-  //     }
-  //     return item;
-  //   });
-  //   setList([...newList]);
-  // }, [readyState, lastJsonMessage]);
+  useEffect(() => {
+    function onRefreshData(data: IRefreshData) {
+      const curr: IMiner[] = data.miners.map((item) => {
+        return {
+          ...item,
+          planet: item.planet.name,
+          target: item.target.name
+        }
+      })
+      setList(curr);
+    }
+
+    socket.on("tick", onRefreshData);
+
+    return () => {
+      socket.off("tick");
+    };
+  }, []);
 
   useEffect(() => {
     const getMiners = async () => {
@@ -73,7 +73,7 @@ export default function Miners() {
         <tbody>
           {list.map((item) => (
             <tr
-              key={item.name}
+              key={item._id}
               onClick={() => {
                 openPopup(item._id, item.name);
               }}

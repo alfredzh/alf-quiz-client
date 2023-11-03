@@ -1,11 +1,13 @@
 import { MouseEventHandler } from "react";
-import useWebSocket from "react-use-websocket";
 import { useState, useEffect } from "react";
 import Rodal from "rodal";
 import PlanetMiners from "./PlanetMiners";
 import CreateMinerForm from "./CreateMinerForm";
 import { IPlanet } from "../../types/planet";
 import "./planets.scss";
+import socket from "../../utils/socket";
+import { IRefreshData } from "../../types/refreshData";
+
 
 const PlanetList = () => {
   const [isSuccessVisible, setIsSuccessVisible] = useState(false);
@@ -16,9 +18,18 @@ const PlanetList = () => {
   const [popupVisible, setPopupVisible] = useState(false);
   const [formVisible, setFormVisible] = useState(false);
   const [list, setList] = useState<IPlanet[]>([]);
-  const { lastJsonMessage, readyState } = useWebSocket(
-    `${process.env.REACT_APP_SOCKET_URL}`
-  );
+  
+  useEffect(() => {
+    function onRefreshData(data: IRefreshData) {
+      setList(data.planets)
+    }
+  
+    socket.on('tick', onRefreshData);
+  
+    return () => {
+      socket.off('tick');
+    };
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -36,7 +47,7 @@ const PlanetList = () => {
     getData();
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
     // if (!lastJsonMessage || lastJsonMessage.message !== "planetUpdate") {
     //   return;
     // }
@@ -51,7 +62,7 @@ const PlanetList = () => {
     //   return item;
     // });
     // setList([...newList]);
-  }, [readyState, lastJsonMessage]);
+  // }, [readyState, lastJsonMessage]);
 
   const showPopup = (id: string, name: string) => {
     setCurrentPlanetId(id);

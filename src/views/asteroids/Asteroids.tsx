@@ -1,19 +1,30 @@
 import { useState, useEffect } from "react";
-// import useWebSocket from "react-use-websocket";
-
-interface IAsteroid {
-  currentMiner?: string;
-  minerals: number;
-  name: string;
-  position: { x: number; y: number };
-  status: number;
-}
+import { IAsteroid } from "../../types/asteroid";
+import { IRefreshData } from "../../types/refreshData";
+import socket from "../../utils/socket";
 
 export default function Asteroids() {
   const [list, setList] = useState<IAsteroid[]>([]);
-  // const { lastJsonMessage, readyState } = useWebSocket(
-  //   `${process.env.REACT_APP_SOCKET_URL}`
-  // );
+
+  useEffect(() => {
+    function onRefreshData(data: IRefreshData) {
+      const curr: IAsteroid[] = data.asteroids.map((item) => {
+        return {
+          ...item,
+          currentMiner: item.currentMiner ? item.currentMiner.name : ''
+        }
+      })
+      setList(
+        curr
+      );
+    }
+
+    socket.on("tick", onRefreshData);
+
+    return () => {
+      socket.off("tick");
+    };
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -31,23 +42,6 @@ export default function Asteroids() {
     getData();
   }, []);
 
-  // useEffect(() => {
-  //   if (!lastJsonMessage || lastJsonMessage.message !== "asteroidUpdate") {
-  //     return;
-  //   }
-  //   const asteroid = lastJsonMessage.asteroid;
-  //   if (!asteroid) {
-  //     return;
-  //   }
-  //   const newList = list.map((item) => {
-  //     if (item.id === asteroid.id) {
-  //       item = asteroid;
-  //     }
-  //     return item;
-  //   });
-  //   setList([...newList]);
-  // }, [readyState, lastJsonMessage]);
-
   return (
     <div className="list">
       <table>
@@ -62,7 +56,7 @@ export default function Asteroids() {
 
         <tbody>
           {list.map((item) => (
-            <tr key={item.name}>
+            <tr key={item._id}>
               <td>{item.name}</td>
               <td className={item.minerals === 0 ? "alert" : ""}>
                 {item.minerals}
